@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    container_name: open-rag
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./laravel:/var/www
+      - ./laravel/docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./laravel/.env
